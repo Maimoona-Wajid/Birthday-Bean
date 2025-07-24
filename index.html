@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Smoll Bean!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translate3d(0, 0, 0);
+            }
+            40%, 43% {
+                transform: translate3d(0, -30px, 0);
+            }
+            70% {
+                transform: translate3d(0, -15px, 0);
+            }
+            90% {
+                transform: translate3d(0, -4px, 0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8d7da, #e2b7eb, #f8d7da);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            z-index: 10;
+        }
+
+        .top-left {
+            top: 2rem;
+            left: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        .top-right {
+            top: 2rem;
+            right: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 4rem 1rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .main-card {
+            max-width: 48rem;
+            width: 100%;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #8b5cf6, #ec4899);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .main-text {
+            color: #374151;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .scroll-text {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .illustration-container {
+            width: 100%;
+            max-width: 32rem;
+            margin: 0 auto 2rem;
+        }
+
+        .illustration-card {
+            background: linear-gradient(to bottom, #dbeafe, #bfdbfe);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .illustration-heart {
+            position: absolute;
+            font-size: 1rem;
+        }
+
+        .candles-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .candle {
+            font-size: 3.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .heart-cake {
+            font-size: 5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .presents-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .present {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+
+        .birthday-cake {
+            font-size: 4rem;
+            animation: pulse 2s infinite;
+        }
+
+        .decoration {
+            position: absolute;
+            color: #fda4af;
+            font-size: 0.875rem;
+            animation: pulse 2s infinite;
+        }
+
+        .question-card {
+            max-width: 32rem;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .question-title {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #8b5cf6, #ec4899);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-main {
+            color: #374151;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-sub {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            position: relative;
+            height: 5rem;
+        }
+
+        .yes-button {
+            background: linear-gradient(to right, #8b5cf6, #ec4899);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .yes-button:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .no-button {
+            background: #e5e7eb;
+            color: #374151;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            transition: transform 0.3s ease-out;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .final-card {
+            max-width: 32rem;
+            width: 100%;
+        }
+
+        .hearts-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .final-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #8b5cf6, #ec4899);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-text {
+            color: #374151;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        .final-emojis {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 3rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .final-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Floating hearts -->
+        <div class="floating-heart top-left">🎈</div>
+        <div class="floating-heart top-right">🎈</div>
+
+        <div class="content-wrapper">
+            <!-- Main birthday message -->
+            <div class="card main-card">
+                <h1 class="main-title">
+                    <span style="-webkit-text-fill-color: initial; color: initial;">🎊</span> Happy Birthday, Smoll Bean! <span style="-webkit-text-fill-color: initial; color: initial;">🥂</span>
+                </h1>
+                
+                <p class="main-text">
+                    Today we celebrate the fact that you exist and make everything better just by being you ⋆♡｡✧˚
+                </p>
+                
+                <p class="scroll-text">
+                    Did I plan something just to make you smile? Obviously not, I'm way too selfish for that... keep scrolling 😏
+                </p>
+            </div>
+
+            <!-- Birthday illustration with hearts and candles -->
+            <div class="illustration-container">
+                <div class="illustration-card">
+                    <!-- Floating hearts -->
+                    <div class="illustration-heart" style="top: 1rem; left: 2rem; color: #f472b6; animation: pulse 2s infinite;">♡</div>
+                    <div class="illustration-heart" style="top: 3rem; right: 3rem; color: white; animation: bounce 2s infinite;">🚬</div>
+                    <div class="illustration-heart" style="top: 5rem; left: 4rem; color: #fda4af; animation: pulse 2s infinite;">✧</div>
+                    <div class="illustration-heart" style="top: 1.5rem; right: 6rem; color: #f472b6; animation: bounce 2s infinite;">🧁</div>
+                    <div class="illustration-heart" style="top: 4rem; left: 8rem; color: white; animation: pulse 2s infinite;">🚬</div>
+                    <div class="illustration-heart" style="top: 2rem; right: 2rem; color: #fda4af; animation: bounce 2s infinite;">✧</div>
+                    <div class="illustration-heart" style="bottom: 3rem; left: 2rem; color: #f472b6; animation: pulse 2s infinite;">🧁</div>
+                    <div class="illustration-heart" style="bottom: 2rem; right: 4rem; color: white; animation: bounce 2s infinite;">🚬</div>
+                    
+                    <!-- Birthday cake with candles -->
+                    <div class="candles-container">
+                        <div class="candle" style="animation-delay: 0.1s;">🎇</div>
+                        <div class="candle" style="animation-delay: 0.2s;">🕯️</div>
+                        <div class="heart-cake">🍸</div>
+                        <div class="candle" style="animation-delay: 0.3s;">🕯️</div>
+                        <div class="candle" style="animation-delay: 0.4s;">🎇</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second illustration - Birthday presents -->
+            <div class="illustration-container">
+                <div class="illustration-card">
+                    <div class="presents-container">
+                        <div class="present" style="animation-delay: 0.1s;">🍾</div>
+                        <div class="present" style="animation-delay: 0.2s;">🎁</div>
+                        <div class="birthday-cake">🎂</div>
+                        <div class="present" style="animation-delay: 0.3s;">🎁</div>
+                        <div class="present" style="animation-delay: 0.4s;">🍾</div>
+                    </div>
+                    
+                    <!-- Decorative elements -->
+                    <div class="decoration" style="top: 1rem; left: 2rem;">🍰</div>
+                    <div class="decoration" style="top: 1rem; right: 2rem;">🍦</div>
+                    <div class="decoration" style="bottom: 1rem; left: 3rem;">🍦</div>
+                    <div class="decoration" style="bottom: 1rem; right: 3rem;">🍰</div>
+                </div>
+            </div>
+
+            <!-- Question section -->
+            <div class="card question-card hidden" id="questionCard">
+                <h2 class="question-title">
+                   Good vibes so far?Awesome, because now comes the real talk <span style="-webkit-text-fill-color: initial; color: initial;">💫</span>
+                </h2>
+                
+                <p class="question-main">
+                    So... you're treating me to something delicious for your birthday, right? 😉 (The correct answer is yes) ♡
+                </p>
+                
+                <p class="question-sub">
+                    (okay fine, maybe the organization will be there too...😈)
+                </p>
+                <p class="question-sub" style="margin-bottom: 2rem;">
+                    ( but they don't count as 'anyone'😌)
+                </p>
+                
+                <div class="buttons-container" id="buttonsContainer">
+                    <button class="yes-button" onclick="showFinal()">
+                        Yes 🎀
+                    </button>
+                    
+                    <button class="no-button" id="noButton" onmouseenter="moveNoButton()" onfocus="moveNoButton()">
+                        No ☢️ 
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final screen -->
+    <div class="main-container final-container hidden" id="finalScreen">
+        <div class="card final-card">
+            <div class="hearts-row">
+                ✧ ☾ ♛ ☾ ✧
+            </div>
+            <h1 class="final-title">
+                See? <span style="-webkit-text-fill-color: initial; color: initial;">😇</span>I knew you couldn't resist making me happy😌
+            </h1>
+            <p class="final-text">
+                So I can choose any day I want? I'm already planning the perfect timing ♡
+            </p>
+            <div class="final-emojis">
+                🍾 💃
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let noButtonPosition = { x: 0, y: 0 };
+
+        // Show question after 2 seconds
+        setTimeout(() => {
+            document.getElementById('questionCard').classList.remove('hidden');
+        }, 2000);
+
+        function showFinal() {
+            document.querySelector('.main-container:not(.final-container)').style.display = 'none';
+            document.getElementById('finalScreen').classList.remove('hidden');
+        }
+
+        function moveNoButton() {
+            const container = document.getElementById('buttonsContainer');
+            const button = document.getElementById('noButton');
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = button.getBoundingClientRect();
+            
+            // Generate random position within container bounds
+            const maxX = containerRect.width - buttonRect.width - 20;
+            const maxY = containerRect.height - buttonRect.height - 20;
+            
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            
+            button.style.transform = `translate(${newX}px, ${newY}px)`;
+        }
+    </script>
+</body>
+</html>
